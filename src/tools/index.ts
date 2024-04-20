@@ -38,7 +38,6 @@ import { tool as dockerRunToDockerComposeConverter } from './docker-run-to-docke
 import { tool as htmlWysiwygEditor } from './html-wysiwyg-editor';
 import { tool as rsaKeyPairGenerator } from './rsa-key-pair-generator';
 import { tool as textToNatoAlphabet } from './text-to-nato-alphabet';
-import { tool as slugifyString } from './slugify-string';
 import { tool as keycodeInfo } from './keycode-info';
 import { tool as jsonMinify } from './json-minify';
 import { tool as bcrypt } from './bcrypt';
@@ -67,7 +66,6 @@ import { tool as mimeTypes } from './mime-types';
 import { tool as otpCodeGeneratorAndValidator } from './otp-code-generator-and-validator';
 import { tool as qrCodeGenerator } from './qr-code-generator';
 import { tool as wifiQrCodeGenerator } from './wifi-qr-code-generator';
-import { tool as randomPortGenerator } from './random-port-generator';
 import { tool as romanNumeralConverter } from './roman-numeral-converter';
 import { tool as sqlPrettify } from './sql-prettify';
 import { tool as svgPlaceholderGenerator } from './svg-placeholder-generator';
@@ -84,100 +82,120 @@ import { tool as yamlViewer } from './yaml-viewer';
 
 export const toolsByCategory: ToolCategory[] = [
   {
-    name: 'Crypto',
-    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
+    name: 'Generator',
+    components: [tokenGenerator],
   },
   {
     name: 'Converter',
     components: [
-      dateTimeConverter,
-      baseConverter,
-      romanNumeralConverter,
-      base64StringConverter,
-      base64FileConverter,
-      colorConverter,
-      caseConverter,
-      textToNatoAlphabet,
-      textToBinary,
-      textToUnicode,
-      yamlToJson,
-      yamlToToml,
-      jsonToYaml,
-      jsonToToml,
-      listConverter,
-      tomlToJson,
-      tomlToYaml,
-    ],
-  },
-  {
-    name: 'Web',
-    components: [
-      urlEncoder,
-      htmlEntities,
-      urlParser,
-      deviceInformation,
-      basicAuthGenerator,
-      metaTagGenerator,
-      otpCodeGeneratorAndValidator,
-      mimeTypes,
-      jwtParser,
-      keycodeInfo,
-      slugifyString,
-      htmlWysiwygEditor,
-      userAgentParser,
-      httpStatusCodes,
-      jsonDiff,
-      safelinkDecoder,
-    ],
-  },
-  {
-    name: 'Images and videos',
-    components: [qrCodeGenerator, wifiQrCodeGenerator, svgPlaceholderGenerator, cameraRecorder],
-  },
-  {
-    name: 'Development',
-    components: [
-      gitMemo,
-      randomPortGenerator,
-      crontabGenerator,
-      jsonViewer,
-      jsonMinify,
       jsonToCsv,
-      sqlPrettify,
-      chmodCalculator,
-      dockerRunToDockerComposeConverter,
       xmlFormatter,
-      yamlViewer,
     ],
   },
   {
-    name: 'Network',
-    components: [ipv4SubnetCalculator, ipv4AddressConverter, ipv4RangeExpander, macAddressLookup, macAddressGenerator, ipv6UlaGenerator],
+    name: 'Selector',
+    components: [emojiPicker, colorConverter],
   },
   {
-    name: 'Math',
-    components: [mathEvaluator, etaCalculator, percentageCalculator],
+    name: 'Information',
+    components: [deviceInformation],
   },
-  {
-    name: 'Measurement',
-    components: [chronometer, temperatureConverter, benchmarkBuilder],
-  },
-  {
-    name: 'Text',
-    components: [
-      loremIpsumGenerator,
-      textStatistics,
-      emojiPicker,
-      stringObfuscator,
-      textDiff,
-      numeronymGenerator,
-      asciiTextDrawer,
-    ],
-  },
-  {
-    name: 'Data',
-    components: [phoneParserAndFormatter, ibanValidatorAndParser],
-  },
+
+  // {
+  //   name: 'Crypto',
+  //   components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
+  // },
+  // {
+  //   name: 'Converter',
+  //   components: [
+  //     dateTimeConverter,
+  //     baseConverter,
+  //     romanNumeralConverter,
+  //     base64StringConverter,
+  //     base64FileConverter,
+  //     colorConverter,
+  //     caseConverter,
+  //     textToNatoAlphabet,
+  //     textToBinary,
+  //     textToUnicode,
+  //     yamlToJson,
+  //     yamlToToml,
+  //     jsonToYaml,
+  //     jsonToToml,
+  //     listConverter,
+  //     tomlToJson,
+  //     tomlToYaml,
+  //   ],
+  // },
+  // {
+  //   name: 'Web',
+  //   components: [
+  //     urlEncoder,
+  //     htmlEntities,
+  //     urlParser,
+  //     deviceInformation,
+  //     basicAuthGenerator,
+  //     metaTagGenerator,
+  //     otpCodeGeneratorAndValidator,
+  //     mimeTypes,
+  //     jwtParser,
+  //     keycodeInfo,
+  //     slugifyString,
+  //     htmlWysiwygEditor,
+  //     userAgentParser,
+  //     httpStatusCodes,
+  //     jsonDiff,
+  //     safelinkDecoder,
+  //   ],
+  // },
+  // {
+  //   name: 'Images and videos',
+  //   components: [qrCodeGenerator, wifiQrCodeGenerator, svgPlaceholderGenerator, cameraRecorder],
+  // },
+  // {
+  //   name: 'Development',
+  //   components: [
+  //     gitMemo,
+  //     randomPortGenerator,
+  //     crontabGenerator,
+  //     jsonViewer,
+  //     jsonMinify,
+  //     jsonToCsv,
+  //     sqlPrettify,
+  //     chmodCalculator,
+  //     dockerRunToDockerComposeConverter,
+  //     xmlFormatter,
+  //     yamlViewer,
+  //   ],
+  // },
+  // {
+  //   name: 'Network',
+  //   components: [ipv4SubnetCalculator, ipv4AddressConverter, ipv4RangeExpander, macAddressLookup, macAddressGenerator, ipv6UlaGenerator],
+  // },
+  // {
+  //   name: 'Math',
+  //   components: [mathEvaluator, etaCalculator, percentageCalculator],
+  // },
+  // {
+  //   name: 'Measurement',
+  //   components: [chronometer, temperatureConverter, benchmarkBuilder],
+  // },
+  // {
+  //   name: 'Text',
+  //   components: [
+  //     loremIpsumGenerator,
+  //     textStatistics,
+  //     emojiPicker,
+  //     stringObfuscator,
+  //     textDiff,
+  //     numeronymGenerator,
+  //     asciiTextDrawer,
+  //   ],
+  // },
+  // {
+  //   name: 'Data',
+  //   components: [phoneParserAndFormatter, ibanValidatorAndParser],
+  // },
 ];
 
 export const tools = toolsByCategory.flatMap(({ components }) => components);

@@ -59,6 +59,9 @@ search:
 tools:
   categories:
     favorite-tools: '我的收藏'
+    generator: '生成器'
+    selector: '选择器'
+    information: '信息'
     crypto: '加密'
     converter: '转换器'
     web: Web
@@ -142,17 +145,9 @@ tools:
     title: Git 备忘录
     description: Git是一种去中心化的版本管理软件。使用此备忘单，您可以快速访问最常见的git命令.
 
-  slugify-string:
-    title: 打乱字符串
-    description: 确保字符串 url、文件名和 id 安全。
-
   encryption:
     title: 加密/解密文本
     description: 使用加密算法（如AES、TripleDES、Rabbit或RC4）加密和解密文本明文。
-
-  random-port-generator:
-    title: 随机端口生成
-    description: 生成“已知”端口范围（0-1023）之外的随机端口号。
 
   yaml-prettify:
     title: YAML美化和格式化
