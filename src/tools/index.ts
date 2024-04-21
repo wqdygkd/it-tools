@@ -87,10 +87,7 @@ export const toolsByCategory: ToolCategory[] = [
   },
   {
     name: 'Converter',
-    components: [
-      jsonToCsv,
-      xmlFormatter,
-    ],
+    components: [jsonToCsv, xmlFormatter],
   },
   {
     name: 'Selector',
