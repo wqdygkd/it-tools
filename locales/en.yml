@@ -147,9 +147,17 @@ tools:
     title: Git cheatsheet
     description: Git is a decentralized version management software. With this cheatsheet, you will have quick access to the most common git commands.
 
+  slugify-string:
+    title: Slugify string
+    description: Make a string url, filename and id safe.
+
   encryption:
     title: Encrypt / decrypt text
     description: Encrypt clear text and decrypt ciphertext using crypto algorithms like AES, TripleDES, Rabbit or RC4.
+
+  random-port-generator:
+    title: Random port generator
+    description: Generate random port numbers outside of the range of "known" ports (0-1023).
 
   yaml-prettify:
     title: YAML prettify and format
