@@ -6,31 +6,43 @@ const { width, height } = useWindowSize();
 
 const sections = [
   {
-    name: 'Screen',
+    name: '屏幕',
     information: [
       {
-        label: 'Screen size',
+        label: '屏幕尺寸',
+        tip: 'window.screen.availWidth x window.screen.availHeight',
         value: computed(() => `${window.screen.availWidth} x ${window.screen.availHeight}`),
+        showCopy: true,
       },
       {
-        label: 'Orientation',
+        label: '方向',
+        tip: 'window.screen.orientation.type',
         value: computed(() => window.screen.orientation.type),
+        showCopy: true,
       },
       {
         label: 'Orientation angle',
+        tip: 'window.screen.orientation.angle',
         value: computed(() => `${window.screen.orientation.angle}°`),
+        showCopy: true,
       },
       {
         label: 'Color depth',
+        tip: 'window.screen.colorDepth',
         value: computed(() => `${window.screen.colorDepth} bits`),
+        showCopy: true,
       },
       {
-        label: 'Pixel ratio',
+        label: '像素比',
+        tip: 'window.devicePixelRatio',
         value: computed(() => `${window.devicePixelRatio} dppx`),
+        showCopy: true,
       },
       {
-        label: 'Window size',
+        label: '窗户尺寸',
+        tip: 'window.innerWidth x window.innerHeight',
         value: computed(() => `${width.value} x ${height.value}`),
+        showCopy: true,
       },
     ],
   },
@@ -40,14 +52,17 @@ const sections = [
       {
         label: 'Browser vendor',
         value: computed(() => navigator.vendor),
+        showCopy: true,
       },
       {
         label: 'Languages',
         value: computed(() => navigator.languages.join(', ')),
+        showCopy: true,
       },
       {
         label: 'Platform',
         value: computed(() => navigator.platform),
+        showCopy: true,
       },
       {
         label: 'User agent',
@@ -59,7 +74,7 @@ const sections = [
 ];
 
 const { copy, isJustCopied } = useCopy({ createToast: false });
-const tooltipText = computed(() => isJustCopied.value ? 'Copied!' : 'Copy to clipboard');
+const tooltipText = computed(() => (isJustCopied.value ? '已复制' : '复制到剪切板'));
 </script>
 
 <template>
@@ -79,7 +94,7 @@ const tooltipText = computed(() => isJustCopied.value ? 'Copied!' : 'Copy to cli
           </div>
 
           <c-tooltip v-if="showCopy" :tooltip="tooltipText">
-            <c-button circle variant="text" size="small" @click="copy(value, { notificationMessage: 'Roman number copied to the clipboard' })">
+            <c-button circle variant="text" size="small" @click="copy(value, { notificationMessage: '' })">
               <icon-mdi-content-copy />
             </c-button>
           </c-tooltip>

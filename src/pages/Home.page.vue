@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Heart } from '@vicons/tabler';
+import { IconHeart } from '@tabler/icons-vue';
 import { useHead } from '@vueuse/head';
 import ColoredCard from '../components/ColoredCard.vue';
 import ToolCard from '../components/ToolCard.vue';
@@ -16,8 +16,8 @@ const { t } = useI18n();
   <div class="pt-50px">
     <div class="grid-wrapper">
       <div v-if="config.showBanner" class="grid grid-cols-1 gap-12px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4">
-        <ColoredCard :title="$t('home.follow.title')" :icon="Heart">
-          {{ $t('home.follow.p1') }}
+        <ColoredCard :title="$t('home.follow.title')" :icon="IconHeart">
+          {{ $t('home.follow.p1') }}111
           <a
             href="https://github.com/CorentinTh/it-tools"
             rel="noopener"
@@ -32,7 +32,7 @@ const { t } = useI18n();
             :aria-label="$t('home.follow.twitterAccount')"
           >Twitter</a>.
           {{ $t('home.follow.thankYou') }}
-          <n-icon :component="Heart" />
+          <n-icon :component="IconHeart" />
         </ColoredCard>
       </div>
 
