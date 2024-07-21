@@ -1,6 +1,6 @@
-import { IconCloudDataConnection } from '@tabler/icons-vue';
+import { IconCloudDataConnection } from '@tabler/icons-vue'
 
-import { defineTool } from '../../tool';
+import { defineTool } from '../../tool'
 
 export const tool = defineTool({
   name: 'IP 信息',
@@ -9,8 +9,8 @@ export const tool = defineTool({
   keywords: [
     'device',
     'information',
-    'ip',
+    'ip'
   ],
   component: () => import('./ip-information.vue'),
-  icon: IconCloudDataConnection,
-});
+  icon: IconCloudDataConnection
+})

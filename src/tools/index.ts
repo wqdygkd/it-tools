@@ -84,9 +84,9 @@
 // import { tool as jsonToCsv } from './json-to-csv';
 // import { tool as colorConverter } from './color-converter';
 
-import type { ToolCategory } from './tools.types';
-import { tool as deviceInformation } from './information/device-information';
-import { tool as ipInformation } from './information/ip-information';
+import type { ToolCategory } from './tools.types'
+import { tool as deviceInformation } from './information/device-information'
+import { tool as ipInformation } from './information/ip-information'
 
 export const toolsByCategory: ToolCategory[] = [
   // {
@@ -103,8 +103,9 @@ export const toolsByCategory: ToolCategory[] = [
   // },
   {
     name: '信息',
-    components: [deviceInformation, ipInformation],
-  },
+    key: 'information',
+    components: [deviceInformation, ipInformation]
+  }
 
   // {
   //   name: 'Crypto',
@@ -201,9 +202,9 @@ export const toolsByCategory: ToolCategory[] = [
   //   name: 'Data',
   //   components: [phoneParserAndFormatter, ibanValidatorAndParser],
   // },
-];
+]
 
-export const tools = toolsByCategory.flatMap(({ components }) => components);
+export const tools = toolsByCategory.flatMap(({ components }) => components)
 export const toolsWithCategory = toolsByCategory.flatMap(({ components, name }) =>
-  components.map(tool => ({ category: name, ...tool })),
-);
+  components.map(tool => ({ category: name, ...tool }))
+)

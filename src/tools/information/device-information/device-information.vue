@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useWindowSize } from '@vueuse/core';
-import { useCopy } from '@/composable/copy';
+import { useWindowSize } from '@vueuse/core'
+import { useCopy } from '@/composable/copy'
 
-const { width, height } = useWindowSize();
+const { width, height } = useWindowSize()
 
 const sections = [
   {
@@ -12,39 +12,39 @@ const sections = [
         label: '屏幕尺寸',
         tip: 'window.screen.availWidth x window.screen.availHeight',
         value: computed(() => `${window.screen.availWidth} x ${window.screen.availHeight}`),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: '方向',
         tip: 'window.screen.orientation.type',
         value: computed(() => window.screen.orientation.type),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: 'Orientation angle',
         tip: 'window.screen.orientation.angle',
         value: computed(() => `${window.screen.orientation.angle}°`),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: 'Color depth',
         tip: 'window.screen.colorDepth',
         value: computed(() => `${window.screen.colorDepth} bits`),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: '像素比',
         tip: 'window.devicePixelRatio',
         value: computed(() => `${window.devicePixelRatio} dppx`),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: '窗户尺寸',
         tip: 'window.innerWidth x window.innerHeight',
         value: computed(() => `${width.value} x ${height.value}`),
-        showCopy: true,
-      },
-    ],
+        showCopy: true
+      }
+    ]
   },
   {
     name: 'Device',
@@ -52,29 +52,29 @@ const sections = [
       {
         label: 'Browser vendor',
         value: computed(() => navigator.vendor),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: 'Languages',
         value: computed(() => navigator.languages.join(', ')),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: 'Platform',
         value: computed(() => navigator.platform),
-        showCopy: true,
+        showCopy: true
       },
       {
         label: 'User agent',
         value: computed(() => navigator.userAgent),
-        showCopy: true,
-      },
-    ],
-  },
-];
+        showCopy: true
+      }
+    ]
+  }
+]
 
-const { copy, isJustCopied } = useCopy({ createToast: false });
-const tooltipText = computed(() => (isJustCopied.value ? '已复制' : '复制到剪切板'));
+const { copy, isJustCopied } = useCopy({ createToast: false })
+const tooltipText = computed(() => (isJustCopied.value ? '已复制' : '复制到剪切板'))
 </script>
 
 <template>

@@ -1,5 +1,5 @@
-import { IconDeviceDesktop } from '@tabler/icons-vue';
-import { defineTool } from '../../tool';
+import { IconDeviceDesktop } from '@tabler/icons-vue'
+import { defineTool } from '../../tool'
 
 export const tool = defineTool({
   name: '设备信息',
@@ -16,8 +16,8 @@ export const tool = defineTool({
     'computer',
     'size',
     'user',
-    'agent',
+    'agent'
   ],
   component: () => import('./device-information.vue'),
-  icon: IconDeviceDesktop,
-});
+  icon: IconDeviceDesktop
+})
