@@ -1,31 +1,31 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
-import { useHead } from '@vueuse/head';
-import type { HeadObject } from '@vueuse/head';
+import { useRoute } from 'vue-router'
+import { useHead } from '@vueuse/head'
+import type { HeadObject } from '@vueuse/head'
 
-import BaseLayout from './base.layout.vue';
-import FavoriteButton from '@/components/FavoriteButton.vue';
-import type { Tool } from '@/tools/tools.types';
+import BaseLayout from './base.layout.vue'
+import FavoriteButton from '@/components/FavoriteButton.vue'
+import type { Tool } from '@/tools/tools.types'
 
-const route = useRoute();
+const route = useRoute()
 
 const head = computed<HeadObject>(() => ({
   title: `${route.meta.name} - IT Tools`,
   meta: [
     {
       name: 'description',
-      content: route.meta?.description as string,
+      content: route.meta?.description as string
     },
     {
       name: 'keywords',
-      content: ((route.meta.keywords ?? []) as string[]).join(','),
-    },
-  ],
-}));
-useHead(head);
+      content: ((route.meta.keywords ?? []) as string[]).join(',')
+    }
+  ]
+}))
+useHead(head)
 
-const toolTitle = computed<string>(() => String(route.meta.name));
-const toolDescription = computed<string>(() => String(route.meta.description));
+const toolTitle = computed<string>(() => String(route.meta.name))
+const toolDescription = computed<string>(() => String(route.meta.description))
 </script>
 
 <template>

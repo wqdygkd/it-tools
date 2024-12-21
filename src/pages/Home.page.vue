@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { IconHeart } from '@tabler/icons-vue';
-import { useHead } from '@vueuse/head';
-import ColoredCard from '../components/ColoredCard.vue';
-import ToolCard from '../components/ToolCard.vue';
-import { useToolStore } from '@/tools/tools.store';
-import { config } from '@/config';
+import { IconHeart } from '@tabler/icons-vue'
+import { useHead } from '@vueuse/head'
+import ColoredCard from '../components/ColoredCard.vue'
+import ToolCard from '../components/ToolCard.vue'
+import { useToolStore } from '@/tools/tools.store'
+import { config } from '@/config'
 
-const toolStore = useToolStore();
+const toolStore = useToolStore()
 
-useHead({ title: 'IT Tools - Handy online tools for developers' });
-const { t } = useI18n();
+useHead({ title: 'IT Tools - Handy online tools for developers' })
+const { t } = useI18n()
 </script>
 
 <template>
