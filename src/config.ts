@@ -57,14 +57,14 @@ export const config = figue({
     doc: 'Show the banner',
     format: 'boolean',
     default: false,
-    env: 'VITE_SHOW_BANNER',
+    env: 'VITE_SHOW_BANNER'
   },
   showSponsorBanner: {
     doc: 'Show the sponsor banner',
     format: 'boolean',
     default: false,
-    env: 'VITE_SHOW_SPONSOR_BANNER',
-  },
+    env: 'VITE_SHOW_SPONSOR_BANNER'
+  }
 })
   .loadEnv({
     ...import.meta.env,

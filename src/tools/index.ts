@@ -87,6 +87,7 @@
 import type { ToolCategory } from './tools.types'
 import { tool as deviceInformation } from './information/device-information'
 import { tool as ipInformation } from './information/ip-information'
+import { tool as idNumberGenerator } from './generator/id-number-generator'
 
 export const toolsByCategory: ToolCategory[] = [
   // {
@@ -104,7 +105,17 @@ export const toolsByCategory: ToolCategory[] = [
   {
     name: '信息',
     key: 'information',
-    components: [deviceInformation, ipInformation]
+    components: [
+      deviceInformation
+      // ipInformation
+    ]
+  },
+  {
+    name: '生成器',
+    key: 'generator',
+    components: [
+      idNumberGenerator
+    ]
   }
 
   // {
