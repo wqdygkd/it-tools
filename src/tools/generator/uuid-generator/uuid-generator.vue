@@ -53,15 +53,22 @@ const validUuidRules = [
   }
 ]
 
-const generators = {
+type UUIDGenerator = ((index: number) => string) | (() => string)
+type Generators = {
+  [key in typeof versions[number]['value']]: UUIDGenerator
+} & {
+  NIL: () => string
+  MAX: () => string
+}
+
+const generators: Generators = {
   NIL: () => nilUuid,
   MAX: () => maxUuid,
   v1: (index: number) =>
     generateUuidV1({
       clockseq: index,
       msecs: Date.now(),
-      nsecs: Math.floor(Math.random() * 10000),
-      node: Array.from({ length: 6 }, () => Math.floor(Math.random() * 256))
+      nsecs: Math.floor(Math.random() * 10000)
     }),
   v3: () => generateUuidV3(v35Args.value.name, v35Args.value.namespace),
   v4: () => generateUuidV4(),
@@ -70,8 +77,7 @@ const generators = {
     generateUuidV6({
       clockseq: index,
       msecs: Date.now(),
-      nsecs: Math.floor(Math.random() * 10000),
-      node: Array.from({ length: 6 }, () => Math.floor(Math.random() * 256))
+      nsecs: Math.floor(Math.random() * 10000)
     }),
   v7: () => generateUuidV7()
 }
@@ -82,21 +88,26 @@ const [uuids, refreshUUIDs] = computedRefreshable(() =>
       Array.from({ length: count.value }, (_ignored, index) => {
         const generator = generators[version.value] ?? generators.NIL
         return generator(index)
-      }).join('\n'),
-    ''
+      }),
+    []
   )
 )
 
-const { copy } = useCopy({ source: uuids, text: 'UUIDs 已复制到剪切板' })
+const hiddenHyphen = ref(false)
+
+const uuidsDisplayValue = computed(() => {
+  if (hiddenHyphen.value) {
+    return uuids.value.map(item => item.replace(/-/g, '')).join('\n')
+  }
+  return uuids.value.join('\n')
+})
+
+const { copy } = useCopy({ source: uuidsDisplayValue, text: 'UUIDs 已复制到剪切板' })
 </script>
 
 <template>
   <div>
-    <n-form
-      label-placement="left"
-      label-width="100"
-      require-mark-placement="right-hanging"
-    >
+    <n-form label-placement="left" label-width="100" require-mark-placement="right-hanging">
       <n-form-item label="UUID 版本">
         <n-radio-group v-model:value="version">
           <n-radio-button v-for="v in versions" :key="v.value" :value="v.value" :label="v.label" />
@@ -108,7 +119,10 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs 已复制到剪切板' })
       <template v-if="version === 'v3' || version === 'v5'">
         <n-form-item label="命名空间">
           <n-radio-group v-model:value="v35Args.namespace">
-            <n-radio-button v-for="namespace in namespaces" :key="namespace.value" :value="namespace.value" :label="namespace.label" />
+            <n-radio-button
+              v-for="namespace in namespaces" :key="namespace.value" :value="namespace.value"
+              :label="namespace.label"
+            />
           </n-radio-group>
         </n-form-item>
         <n-form-item label=" ">
@@ -118,25 +132,13 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs 已复制到剪切板' })
           <n-input v-model:value="v35Args.name" placeholder="命名" />
         </n-form-item>
       </template>
+
+      <n-form-item label="去除 -">
+        <n-checkbox v-model:checked="hiddenHyphen" style="margin-right: 12px" />
+      </n-form-item>
     </n-form>
 
-    <div mb-2 flex items-center>
-      <span w-100px>去除 - </span>
-    </div>
-
-    <c-input-text
-      style="text-align: center; font-family: monospace"
-      :value="uuids"
-      multiline
-      placeholder="Your uuids"
-      autosize
-      rows="1"
-      readonly
-      raw-text
-      monospace
-      my-3
-      class="uuid-display"
-    />
+    <n-input type="textarea" :value="uuidsDisplayValue" placeholder="uuids" autosize readonly class="uuid-display" />
 
     <div flex justify-center gap-3>
       <c-button autofocus @click="copy()">
@@ -151,6 +153,8 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs 已复制到剪切板' })
 
 <style scoped lang="less">
 ::v-deep(.uuid-display) {
+  margin-bottom: 10px;
+
   textarea {
     text-align: center;
   }
