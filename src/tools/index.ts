@@ -74,7 +74,7 @@
 
 // import { tool as urlEncoder } from './url-encoder';
 // import { tool as urlParser } from './url-parser';
-// import { tool as uuidGenerator } from './uuid-generator';
+
 // import { tool as macAddressLookup } from './mac-address-lookup';
 // import { tool as yamlViewer } from './yaml-viewer';
 
@@ -88,6 +88,7 @@ import type { ToolCategory } from './tools.types'
 import { tool as deviceInformation } from './information/device-information'
 import { tool as ipInformation } from './information/ip-information'
 import { tool as idNumberGenerator } from './generator/id-number-generator'
+import { tool as uuidGenerator } from './generator/uuid-generator'
 
 export const toolsByCategory: ToolCategory[] = [
   // {
@@ -114,7 +115,8 @@ export const toolsByCategory: ToolCategory[] = [
     name: '生成器',
     key: 'generator',
     components: [
-      idNumberGenerator
+      idNumberGenerator,
+      uuidGenerator
     ]
   }
 

@@ -2,16 +2,16 @@
 const optionsA = [
   { label: 'Option A', value: 'a' },
   { label: 'Option B', value: 'b', tooltip: 'This is a tooltip' },
-  { label: 'Option C', value: 'c' },
-];
+  { label: 'Option C', value: 'c' }
+]
 
 const optionB = {
   'Option A': 'a',
   'Option B': 'b',
-  'Option C': 'c',
-};
+  'Option C': 'c'
+}
 
-const valueA = ref('a');
+const valueA = ref('a')
 </script>
 
 <template>
