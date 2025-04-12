@@ -121,6 +121,46 @@ function handleUpdateValue(value: string, option: CascaderOption) {
 // const header = computed(() => `Authorization: Basic ${textToBase64(`${username.value}:${password.value}`)}`)
 
 // const { copy } = useCopy({ source: header, text: 'Header copied to the clipboard' })
+
+function listToTree(list) {
+  const map = new Map()
+  const tree = []
+
+  // 创建哈希映射
+  list.forEach(item => map.set(item.code, { ...item, children: [] }))
+
+  // 构建树结构
+  list.forEach((item) => {
+    const node = map.get(item.code)
+    const parentCode = getParentCode(item.code)
+    if (parentCode === '000000') {
+      tree.push(node)
+    }
+    else {
+      const parent = map.get(parentCode)
+      parent?.children?.push(node)
+    }
+  })
+
+  return tree
+}
+
+function getParentCode(code) {
+  const arr = code.split('')
+
+  let count = 0
+
+  // 从最后一位开始逆向扫描
+  for (let i = 5; i >= 0; i--) {
+    if (arr[i] !== '0') {
+      arr[i] = '0' // 替换非零位
+      if (++count === 2) { break } // 找到两个后立即终止
+    }
+  }
+
+  return arr.join('') // 直接返回6位字符串
+}
+console.log(listToTree(a))
 </script>
 
 <template>

@@ -39,3 +39,5 @@ components.d.ts
 auto-imports.d.ts
 
 .vercel
+
+cookie.json

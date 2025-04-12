@@ -291,6 +291,9 @@ importers:
       hygen:
         specifier: ^6.2.11
         version: 6.2.11
+      iconv-lite:
+        specifier: ^0.6.3
+        version: 0.6.3
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0
