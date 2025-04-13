@@ -1,16 +1,8 @@
 <script setup lang="ts">
 import type { CascaderOption } from 'naive-ui'
-import type { City } from './citys'
-import { citys } from './citys'
+import { ca } from 'date-fns/locale'
+import city from './city.json'
 
-export interface CityOption extends City, CascaderOption {
-  // text: string
-  // code: string
-  shortCode?: string
-  parentCode?: string | null
-}
-
-console.log(citys)
 // import { useCopy } from '@/composable/copy'
 // import { textToBase64 } from '@/utils/base64'
 const formModel = ref({
@@ -21,100 +13,17 @@ const formModel = ref({
 })
 
 const hoverTrigger = ref(false)
-const checkStrategyIsChild = ref(true)
+const checkStrategyIsChild = ref(false)
 const showPath = ref(true)
 const filterable = ref(false)
 
-const options = getOptions(citys)
-
+const options = getOptions(city)
+console.log(options)
 function submitForm() {
   // 表单提交逻辑
   // console.log('提交的表单数据:', formModel.value)
 }
 
-function trimCityCode(cityCode: string): string {
-  if (cityCode.slice(-4) === '0000') {
-    return cityCode.slice(0, 2)
-  }
-  else if (cityCode.slice(-2) === '00') {
-    return cityCode.slice(0, 4)
-  }
-  else {
-    return cityCode
-  }
-}
-function cityParentCode(cityCode: string): string | null {
-  if (cityCode.length === 2) {
-    return null
-  }
-  else if (cityCode.length === 4) {
-    return cityCode.slice(0, 2)
-  }
-  else {
-    return cityCode.slice(0, 4)
-  }
-}
-
-function getOptions(citys: CityOption) {
-  const cityMap: { [key: string]: CityOption & { children?: CityOption[] } } = {}
-
-  citys.forEach((city) => {
-    const shortCode = trimCityCode(city.code)
-    city.shortCode = shortCode
-    city.parentCode = cityParentCode(shortCode)
-    city.parentCode = cityParentCode(shortCode)
-    cityMap[shortCode] = { ...city }
-  })
-
-  const options: CascaderOption[] = []
-  citys.forEach((item) => {
-    if (item.parentCode) {
-      const parentCity = cityMap[item.parentCode]
-      //  || item.parentCode.length === 4 ? cityMap[cityParentCode(item.parentCode) as string] : null
-      if (parentCity) {
-        const shortCode = item.shortCode as string
-        const city = cityMap[shortCode]
-        if (!parentCity.children) {
-          parentCity.children = []
-        }
-        parentCity.children?.push(city)
-      }
-    }
-
-    else {
-      const shortCode = item.shortCode as string
-      const city = cityMap[shortCode]
-      options.push(city)
-    }
-  })
-  // for (let i = 1; i <= length; ++i) {
-  //   if (iterator === 1) {
-  //     options.push({
-  //       value: `v-${i}`,
-  //       label: `l-${i}`,
-  //       disabled: i % 5 === 0,
-  //       children: getOptions(depth, iterator + 1, `${String(i)}`)
-  //     })
-  //   }
-  //   else if (iterator === depth) {
-  //     options.push({
-  //       value: `v-${prefix}-${i}`,
-  //       label: `l-${prefix}-${i}`,
-  //       disabled: i % 5 === 0
-  //     })
-  //   }
-  //   else {
-  //     options.push({
-  //       value: `v-${prefix}-${i}`,
-  //       label: `l-${prefix}-${i}`,
-  //       disabled: i % 5 === 0,
-  //       children: getOptions(depth, iterator + 1, `${prefix}-${i}`)
-  //     })
-  //   }
-  // }
-  console.log(options)
-  return options
-}
 function handleUpdateValue(value: string, option: CascaderOption) {
   console.log(value, option)
 }
@@ -122,45 +31,66 @@ function handleUpdateValue(value: string, option: CascaderOption) {
 
 // const { copy } = useCopy({ source: header, text: 'Header copied to the clipboard' })
 
-function listToTree(list) {
+function getOptions(list) {
   const map = new Map()
   const tree = []
 
-  // 创建哈希映射
-  list.forEach(item => map.set(item.code, { ...item, children: [] }))
+  list.forEach(item => map.set(item.code, { ...item }))
 
   // 构建树结构
   list.forEach((item) => {
     const node = map.get(item.code)
-    const parentCode = getParentCode(item.code)
+    const parentCode = cityParentCode(item.code)
     if (parentCode === '000000') {
       tree.push(node)
     }
     else {
-      const parent = map.get(parentCode)
-      parent?.children?.push(node)
+      const parent = map.get(parentCode) || map.get(cityParentCode(parentCode))
+      if (parent.children) {
+        parent.children?.push(node)
+      }
+      else {
+        parent.children = [node]
+      }
     }
   })
 
   return tree
 }
 
-function getParentCode(code) {
-  const arr = code.split('')
-
-  let count = 0
-
-  // 从最后一位开始逆向扫描
-  for (let i = 5; i >= 0; i--) {
-    if (arr[i] !== '0') {
-      arr[i] = '0' // 替换非零位
-      if (++count === 2) { break } // 找到两个后立即终止
-    }
+function cityParentCode(cityCode: string): string {
+  if (cityCode.slice(-4) === '0000') {
+    return '000000'
   }
-
-  return arr.join('') // 直接返回6位字符串
+  else if (cityCode.slice(-2) === '00') {
+    return `${cityCode.slice(0, 2)}0000`
+  }
+  else {
+    return `${cityCode.slice(0, 4)}00`
+  }
 }
-console.log(listToTree(a))
+function handleLoad(path, callback) {
+  console.log(path, callback)
+  // const parent = map.get(path)
+  // if (!parent) {
+  //   callback([])
+  //   return
+  // }
+  // const children = parent.children
+  // if (children) {
+  //   callback(children)
+  // }
+  // else {
+  //   setTimeout(() => {
+  //     callback([
+  //       {
+  //         label: '加载中...',
+  //         loading: true
+  //       }
+  //     ])
+  //   })
+  // }
+}
 </script>
 
 <template>
@@ -187,33 +117,27 @@ console.log(listToTree(a))
       size="small"
       :style="{ maxWidth: '640px' }"
     >
-      <n-form-item label="出生地" path="name">
+      <n-form-item label="地址" path="name">
         <n-cascader
           v-model:value="formModel.address"
-          placeholder="没啥用的值"
+          placeholder="请选择地址"
           :expand-trigger="hoverTrigger ? 'hover' : 'click'"
           :options="options"
           :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
           :show-path="showPath"
           value-field="code"
-          label-field="text"
+          label-field="cName"
           :filterable="filterable"
           @update:value="handleUpdateValue"
         />
       </n-form-item>
       <n-form-item label="出生日期" path="email">
-        <n-input v-model:value="formModel.email" placeholder="请输入邮箱" />
-      </n-form-item>
-      <n-form-item label="日期" path="password">
-        <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
+        <n-input v-model:value="formModel.email" placeholder="请选择出生日期" />
       </n-form-item>
       <n-form-item label="年龄" path="password">
         <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
       </n-form-item>
       <n-form-item label="性别" path="password">
-        <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
-      </n-form-item>
-      <n-form-item label="姓名" path="password">
         <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
       </n-form-item>
       <n-form-item label="生成数量" path="password">
