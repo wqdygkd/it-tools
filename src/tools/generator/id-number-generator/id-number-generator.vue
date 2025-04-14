@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { CascaderOption } from 'naive-ui'
-import { ca } from 'date-fns/locale'
+import { get } from '@vueuse/core'
 import city from './city.json'
 
 // import { useCopy } from '@/composable/copy'
 // import { textToBase64 } from '@/utils/base64'
 const formModel = ref({
-  address: null,
+  cityCode: null,
+  cityCodeOption: null,
   name: '',
   email: '',
   password: ''
@@ -20,12 +21,41 @@ const filterable = ref(false)
 const options = getOptions(city)
 console.log(options)
 function submitForm() {
+  const { cName, code } = getWholeCityCode()
+  console.log(code)
   // 表单提交逻辑
   // console.log('提交的表单数据:', formModel.value)
 }
 
+function getRandom(list) {
+  const max = list.length - 1
+  const min = 0
+  const random = Math.floor(Math.random() * (max - min + 1)) + min
+  return list[random]
+}
+
+function getWholeCityCode() {
+  const form = get(formModel)
+  let { cName = '', children, parent } = form.cityCodeOption || { children: options }
+  while (parent) {
+    cName = parent.cName + cName
+    parent = parent.parent
+  }
+
+  let code = form.cityCode
+  while (children) {
+    const option = getRandom(children)
+    cName += option.cName
+    code = option.code
+    children = option.children
+  }
+  return { cName, code }
+}
+
 function handleUpdateValue(value: string, option: CascaderOption) {
-  console.log(value, option)
+  console.log('updateValue', value, option)
+
+  formModel.value.cityCodeOption = option
 }
 // const header = computed(() => `Authorization: Basic ${textToBase64(`${username.value}:${password.value}`)}`)
 
@@ -46,6 +76,7 @@ function getOptions(list) {
     }
     else {
       const parent = map.get(parentCode) || map.get(cityParentCode(parentCode))
+      node.parent = parent
       if (parent.children) {
         parent.children?.push(node)
       }
@@ -119,7 +150,7 @@ function handleLoad(path, callback) {
     >
       <n-form-item label="地址" path="name">
         <n-cascader
-          v-model:value="formModel.address"
+          v-model:value="formModel.cityCode"
           placeholder="请选择地址"
           :expand-trigger="hoverTrigger ? 'hover' : 'click'"
           :options="options"
@@ -128,14 +159,15 @@ function handleLoad(path, callback) {
           value-field="code"
           label-field="cName"
           :filterable="filterable"
+          clearable
           @update:value="handleUpdateValue"
         />
       </n-form-item>
-      <n-form-item label="出生日期" path="email">
-        <n-input v-model:value="formModel.email" placeholder="请选择出生日期" />
+      <n-form-item label="出生日期" path="birthDay">
+        <n-date-picker v-model:formatted-value="formModel.birthDay" value-format="yyyy-MM-dd" type="date" />
       </n-form-item>
-      <n-form-item label="年龄" path="password">
-        <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
+      <n-form-item label="年龄" path="age">
+        <n-input v-model:value="formModel.age" placeholder="请输入年龄" />
       </n-form-item>
       <n-form-item label="性别" path="password">
         <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
