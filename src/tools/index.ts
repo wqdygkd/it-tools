@@ -80,7 +80,7 @@
 
 // import { tool as xmlFormatter } from './xml-formatter';
 // import { tool as tokenGenerator } from './token-generator';
-// import { tool as emojiPicker } from './emoji-picker';
+
 // import { tool as jsonToCsv } from './json-to-csv';
 // import { tool as colorConverter } from './color-converter';
 
@@ -89,6 +89,7 @@ import { tool as deviceInformation } from './information/device-information'
 import { tool as ipInformation } from './information/ip-information'
 import { tool as idNumberGenerator } from './generator/id-number-generator'
 import { tool as uuidGenerator } from './generator/uuid-generator'
+import { tool as emojiPicker } from './emoji-picker'
 
 export const toolsByCategory: ToolCategory[] = [
   // {
@@ -117,6 +118,14 @@ export const toolsByCategory: ToolCategory[] = [
     components: [
       idNumberGenerator,
       uuidGenerator
+    ]
+  },
+  {
+    name: '选择器',
+    key: 'Selector',
+    components: [
+      emojiPicker
+      // colorConverter
     ]
   }
 

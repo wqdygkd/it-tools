@@ -1,13 +1,12 @@
-import { MoodSmile } from '@vicons/tabler';
-import { defineTool } from '../tool';
-import { translate } from '@/plugins/i18n.plugin';
+import { MoodSmile } from '@vicons/tabler'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
-  name: translate('tools.emoji-picker.title'),
+  name: 'emoji 选择器',
   path: '/emoji-picker',
-  description: translate('tools.emoji-picker.description'),
+  description: 'emoji 选择器',
   keywords: ['emoji', 'picker', 'unicode', 'copy', 'paste'],
   component: () => import('./emoji-picker.vue'),
   icon: MoodSmile,
-  createdAt: new Date('2023-08-07'),
-});
+  createdAt: new Date('2023-08-07')
+})
