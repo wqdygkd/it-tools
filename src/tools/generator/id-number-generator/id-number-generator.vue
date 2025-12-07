@@ -2,12 +2,15 @@
 import type { CascaderOption } from 'naive-ui'
 import { get } from '@vueuse/core'
 import city from './city.json'
+import { useCascaderAreaData } from './area-data'
 
 // import { useCopy } from '@/composable/copy'
 // import { textToBase64 } from '@/utils/base64'
 const formModel = ref({
   cityCode: null,
   cityCodeOption: null,
+  birthDay: null,
+  age: '',
   name: '',
   email: '',
   password: ''
@@ -18,11 +21,12 @@ const checkStrategyIsChild = ref(false)
 const showPath = ref(true)
 const filterable = ref(false)
 
-const options = getOptions(city)
+const options = useCascaderAreaData()
 console.log(options)
 function submitForm() {
   const { cName, code } = getWholeCityCode()
-  console.log(code)
+  console.log(cName, code)
+  console.log(formModel.value)
   // 表单提交逻辑
   // console.log('提交的表单数据:', formModel.value)
 }
@@ -61,45 +65,6 @@ function handleUpdateValue(value: string, option: CascaderOption) {
 
 // const { copy } = useCopy({ source: header, text: 'Header copied to the clipboard' })
 
-function getOptions(list) {
-  const map = new Map()
-  const tree = []
-
-  list.forEach(item => map.set(item.code, { ...item }))
-
-  // 构建树结构
-  list.forEach((item) => {
-    const node = map.get(item.code)
-    const parentCode = cityParentCode(item.code)
-    if (parentCode === '000000') {
-      tree.push(node)
-    }
-    else {
-      const parent = map.get(parentCode) || map.get(cityParentCode(parentCode))
-      node.parent = parent
-      if (parent.children) {
-        parent.children?.push(node)
-      }
-      else {
-        parent.children = [node]
-      }
-    }
-  })
-
-  return tree
-}
-
-function cityParentCode(cityCode: string): string {
-  if (cityCode.slice(-4) === '0000') {
-    return '000000'
-  }
-  else if (cityCode.slice(-2) === '00') {
-    return `${cityCode.slice(0, 2)}0000`
-  }
-  else {
-    return `${cityCode.slice(0, 4)}00`
-  }
-}
 function handleLoad(path, callback) {
   console.log(path, callback)
   // const parent = map.get(path)
@@ -156,8 +121,8 @@ function handleLoad(path, callback) {
           :options="options"
           :check-strategy="checkStrategyIsChild ? 'child' : 'all'"
           :show-path="showPath"
-          value-field="code"
-          label-field="cName"
+          value-field="value"
+          label-field="label"
           :filterable="filterable"
           clearable
           @update:value="handleUpdateValue"
@@ -170,10 +135,10 @@ function handleLoad(path, callback) {
         <n-input v-model:value="formModel.age" placeholder="请输入年龄" />
       </n-form-item>
       <n-form-item label="性别" path="password">
-        <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
+        <n-input v-model:value="formModel.password" type="password" placeholder="请选择性别" />
       </n-form-item>
       <n-form-item label="生成数量" path="password">
-        <n-input v-model:value="formModel.password" type="password" placeholder="请输入密码" />
+        <n-input v-model:value="formModel.password" type="password" placeholder="请输入生成数量" />
       </n-form-item>
       <n-form-item>
         <n-button type="primary" @click="submitForm">
