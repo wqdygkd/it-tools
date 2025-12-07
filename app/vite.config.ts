@@ -10,7 +10,7 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import svgLoader from 'vite-svg-loader'
-import { configDefaults } from 'vitest/config'
+import tailwindcss from '@tailwindcss/vite'
 
 const baseUrl = process.env.BASE_URL ?? '/'
 
@@ -35,6 +35,7 @@ export default defineConfig({
     vue({
       include: [/\.vue$/, /\.md$/]
     }),
+    tailwindcss(),
     vueJsx(),
     svgLoader(),
     VitePWA({
