@@ -2,7 +2,7 @@
   "name": "tools",
   "type": "module",
   "version": "1.0.0",
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@10.24.0",
   "description": "",
   "author": "c",
   "license": "",

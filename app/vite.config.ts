@@ -3,7 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Unocss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import IconsResolver from 'unplugin-icons/resolver'
+
+// import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
@@ -79,9 +80,9 @@ export default defineConfig({
       dirs: ['src/'],
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      resolvers: [NaiveUiResolver(), IconsResolver({ prefix: 'icon' })]
-    }),
-    Unocss()
+      resolvers: [NaiveUiResolver()]
+    })
+    // Unocss()
   ],
   base: baseUrl,
   resolve: {

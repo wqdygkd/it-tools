@@ -108,7 +108,7 @@ const tools = computed<ToolCategory[]>(() => [
           </c-button>
         </c-tooltip>
 
-        <command-palette />
+        <!-- <command-palette /> -->
 
         <locale-selector v-if="!styleStore.isSmallScreen" />
 
