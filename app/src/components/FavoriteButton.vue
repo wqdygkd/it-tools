@@ -35,7 +35,7 @@ function toggleFavorite(event: MouseEvent) {
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger as-child>
-        <icon-mdi-heart />
+        <!-- <icon-mdi-heart /> -->
       </TooltipTrigger>
       <TooltipContent>
         <p>Add to library</p>
@@ -50,7 +50,6 @@ function toggleFavorite(event: MouseEvent) {
       :style="{ opacity: isFavorite ? 1 : 0.2 }"
       @click="toggleFavorite"
     >
-      <!-- <icon-mdi-heart /> -->
-    </c-button>
+  </c-button>
   </c-tooltip> -->
 </template>

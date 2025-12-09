@@ -1,4 +1,5 @@
 import { URL, fileURLToPath } from 'node:url'
+import { env } from 'node:process'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Unocss from 'unocss/vite'
@@ -13,7 +14,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import svgLoader from 'vite-svg-loader'
 import tailwindcss from '@tailwindcss/vite'
 
-const baseUrl = process.env.BASE_URL ?? '/'
+const baseUrl = env.BASE_URL ?? '/'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -90,7 +91,7 @@ export default defineConfig({
     }
   },
   define: {
-    'import.meta.env.PACKAGE_VERSION': JSON.stringify(process.env.npm_package_version)
+    'import.meta.env.PACKAGE_VERSION': JSON.stringify(env.npm_package_version)
   },
   build: {
     target: 'esnext'

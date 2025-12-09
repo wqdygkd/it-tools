@@ -38,23 +38,6 @@ const data = {
     email: 'm@example.com',
     avatar: '/avatars/shadcn.jpg'
   },
-  teams: [
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise'
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup'
-    },
-    {
-      name: 'Evil Corp.',
-      logo: Command,
-      plan: 'Free'
-    }
-  ],
   navMain: [
     {
       title: 'Playground',
@@ -165,8 +148,17 @@ const data = {
 <template>
   <Sidebar v-bind="props">
     <SidebarHeader>
-      <!-- <TeamSwitcher :teams="data.teams" /> -->
-      111
+      <RouterLink to="/" class="hero-wrapper">
+        <div class="text-wrapper">
+          <div class="title">
+            IT工具
+          </div>
+          <div class="divider" />
+          <div class="subtitle">
+            {{ '助力开发人员和 IT 工作者' }}
+          </div>
+        </div>
+      </RouterLink>
     </SidebarHeader>
     <SidebarContent>
       <NavMain :items="data.navMain" />
@@ -178,3 +170,44 @@ const data = {
     <SidebarRail />
   </Sidebar>
 </template>
+
+<style scoped lang="less">
+.hero-wrapper {
+  display: block;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  overflow: hidden;
+  height: 100px;
+
+  .gradient {
+    margin-top: -65px;
+  }
+
+  .text-wrapper {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 16px;
+    color: #000;
+
+    .title {
+      font-size: 25px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .divider {
+      width: 50px;
+      height: 2px;
+      border-radius: 4px;
+      margin: 0 auto 5px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+    }
+  }
+}
+</style>
