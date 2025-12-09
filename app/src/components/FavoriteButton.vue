@@ -2,6 +2,14 @@
 import { useToolStore } from '@/tools/tools.store'
 import type { Tool } from '@/tools/tools.types'
 
+import { Button } from '@/shadcn/components/ui/button'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '@/shadcn/components/ui/tooltip'
+
 const props = defineProps<{ tool: Tool }>()
 
 const toolStore = useToolStore()
@@ -24,7 +32,17 @@ function toggleFavorite(event: MouseEvent) {
 </script>
 
 <template>
-  <c-tooltip :tooltip="isFavorite ? '取消收藏' : '加入收藏' ">
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger as-child>
+        <icon-mdi-heart />
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Add to library</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+  <!-- <c-tooltip :tooltip="isFavorite ? '取消收藏' : '加入收藏' ">
     <c-button
       variant="text"
       circle
@@ -34,5 +52,5 @@ function toggleFavorite(event: MouseEvent) {
     >
       <!-- <icon-mdi-heart /> -->
     </c-button>
-  </c-tooltip>
+  </c-tooltip> -->
 </template>
