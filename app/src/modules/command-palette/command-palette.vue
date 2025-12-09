@@ -115,7 +115,7 @@ function activateOption(option: PaletteOption) {
     <c-button w-full important:justify-start @click="isModalOpen = true">
       <span flex items-center gap-3 op-40>
 
-        <icon-mdi-search />
+        <!-- <icon-mdi-search /> -->
         搜索
 
         <span hidden flex-1 border border-current border-op-40 rounded border-solid px-5px py-3px sm:inline>

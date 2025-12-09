@@ -2,13 +2,13 @@
 const optionsA = [
   { label: 'Option A', value: 'a' },
   { label: 'Option B', value: 'b' },
-  { label: 'Option C', value: 'c' },
-];
+  { label: 'Option C', value: 'c' }
+]
 
-const optionsBig = Array.from({ length: 1000 }, (_, i) => ({ label: `Option ${i}`, value: i }));
+const optionsBig = Array.from({ length: 1000 }, (_, i) => ({ label: `Option ${i}`, value: i }))
 
-const sizes = ['small', 'medium', 'large'] as const;
-const value = ref('');
+const sizes = ['small', 'medium', 'large'] as const
+const value = ref('')
 </script>
 
 <template>
@@ -44,7 +44,7 @@ const value = ref('');
   <c-select v-model:value="value" :options="optionsA">
     <template #displayed-value>
       <span lh-normal>
-        <icon-mdi-translate />
+        <!-- <icon-mdi-translate /> -->
       </span>
     </template>
   </c-select>

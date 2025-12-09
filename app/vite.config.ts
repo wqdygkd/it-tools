@@ -17,6 +17,7 @@ const baseUrl = process.env.BASE_URL ?? '/'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     AutoImport({
       imports: [
         'vue',
@@ -35,7 +36,6 @@ export default defineConfig({
     vue({
       include: [/\.vue$/, /\.md$/]
     }),
-    tailwindcss(),
     vueJsx(),
     svgLoader(),
     VitePWA({
@@ -80,8 +80,7 @@ export default defineConfig({
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       resolvers: [NaiveUiResolver(), IconsResolver({ prefix: 'icon' })]
-    }),
-    Unocss()
+    })
   ],
   base: baseUrl,
   resolve: {

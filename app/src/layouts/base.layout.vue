@@ -32,7 +32,6 @@ const tools = computed<ToolCategory[]>(() => [
   <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }">
     <template #sider>
       <RouterLink to="/" class="hero-wrapper">
-        <!-- <HeroGradient class="gradient" /> -->
         <div class="text-wrapper">
           <div class="title">
             IT工具
@@ -104,7 +103,7 @@ const tools = computed<ToolCategory[]>(() => [
 
         <c-tooltip tooltip="UI 库" position="bottom">
           <c-button v-if="config.app.env === 'development'" to="/c-lib" circle variant="text">
-            <icon-mdi:brush-variant text-20px />
+            <!-- <icon-mdi:brush-variant text-20px /> -->
           </c-button>
         </c-tooltip>
 
@@ -122,17 +121,6 @@ const tools = computed<ToolCategory[]>(() => [
 </template>
 
 <style lang="less" scoped>
-// ::v-deep(.n-layout-scroll-container) {
-//     @percent: 4%;
-//     @position: 25px;
-//     @size: 50px;
-//     @color: #eeeeee25;
-//     background-image: radial-gradient(@color @percent, transparent @percent),
-//         radial-gradient(@color @percent, transparent @percent);
-//     background-position: 0 0, @position @position;
-//     background-size: @size @size;
-// }
-
 .support-button {
   background: rgb(37, 99, 108);
   background: linear-gradient(48deg, rgba(37, 99, 108, 1) 0%, rgba(59, 149, 111, 1) 60%, rgba(20, 160, 88, 1) 100%);

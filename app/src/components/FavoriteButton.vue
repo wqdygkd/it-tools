@@ -32,7 +32,7 @@ function toggleFavorite(event: MouseEvent) {
       :style="{ opacity: isFavorite ? 1 : 0.2 }"
       @click="toggleFavorite"
     >
-      <icon-mdi-heart />
+      <!-- <icon-mdi-heart /> -->
     </c-button>
   </c-tooltip>
 </template>

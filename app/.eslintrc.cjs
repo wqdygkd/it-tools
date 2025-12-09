@@ -17,6 +17,7 @@ module.exports = {
         importNames: ['useClipboard'],
         message: 'Please use local useCopy from src/composable/copy.ts instead of useClipboard.'
       }]
-    }]
+    }],
+    'vue/no-export-in-script-setup': 0
   }
 }
