@@ -14,7 +14,6 @@ import {
 import type { SidebarProps } from '@/shadcn/components/ui/sidebar'
 
 import NavMain from '@/shadcn/components/NavMain.vue'
-import NavProjects from '@/shadcn/components/NavProjects.vue'
 import NavUser from '@/shadcn/components/NavUser.vue'
 
 // import TeamSwitcher from '@/shadcn/components/TeamSwitcher.vue'
@@ -43,7 +42,6 @@ const data = {
       title: 'Playground',
       url: '#',
       icon: SquareTerminal,
-      isActive: true,
       items: [
         {
           title: 'History',
@@ -124,23 +122,6 @@ const data = {
         }
       ]
     }
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map
-    }
   ]
 }
 </script>
@@ -162,7 +143,6 @@ const data = {
     </SidebarHeader>
     <SidebarContent>
       <NavMain :items="data.navMain" />
-      <NavProjects :projects="data.projects" />
     </SidebarContent>
     <SidebarFooter>
       <NavUser :user="data.user" />

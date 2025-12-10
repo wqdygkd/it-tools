@@ -8,7 +8,7 @@ import {
 } from '@/shadcn/components/ui/collapsible'
 import {
   SidebarGroup,
-  SidebarGroupLabel,
+  // SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -33,7 +33,7 @@ defineProps<{
 
 <template>
   <SidebarGroup>
-    <SidebarGroupLabel>Platform</SidebarGroupLabel>
+    <!-- <SidebarGroupLabel>Platform</SidebarGroupLabel> -->
     <SidebarMenu>
       <Collapsible
         v-for="item in items"
